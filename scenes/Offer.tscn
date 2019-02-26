@@ -1,0 +1,413 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://scripts/Offer.gd" type="Script" id=1]
+[ext_resource path="res://fonts/OpenSans-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://textures/cobra.png" type="Texture" id=3]
+[ext_resource path="res://textures/MANITADER.png" type="Texture" id=4]
+[ext_resource path="res://textures/MANITAIZQ.png" type="Texture" id=5]
+[ext_resource path="res://textures/porta_abierto.png" type="Texture" id=6]
+[ext_resource path="res://textures/porta_cerrado.png" type="Texture" id=7]
+
+[sub_resource type="Curve2D" id=1]
+
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -0.0255883, 720.001, 0, 0, 0, 0, -0.00571823, -0.0139885 )
+}
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 50
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=4]
+
+size = 100
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="Gradient" id=5]
+
+offsets = PoolRealArray( 0, 0.171598, 0.360947, 0.538462, 0.710059, 0.857988, 1 )
+colors = PoolColorArray( 0.988281, 0.0570928, 0.0347443, 1, 1, 0.796875, 0, 1, 0.40625, 1, 0, 1, 0, 1, 0.976563, 1, 0, 0.273438, 1, 1, 0.523438, 0, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+
+flags = 4
+gradient = SubResource( 5 )
+width = 2048
+
+[sub_resource type="Curve" id=7]
+
+min_value = -1.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+
+flags = 4
+width = 2048
+curve = SubResource( 7 )
+
+[sub_resource type="Curve" id=9]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.999427, 0.25293 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+
+flags = 4
+width = 2048
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 2
+emission_box_extents = Vector3( 1, 400, 1 )
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 45.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 500.0
+initial_velocity_random = 0.0
+angular_velocity = 360.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 150.0
+scale_random = 0.0
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 6 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+hue_variation_curve = SubResource( 8 )
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angular Velocity", "Color", "Emission Shape", "Gravity", "Hue Variation", "Initial Velocity", "Scale", "Spread" ]
+
+[sub_resource type="StyleBoxFlat" id=3]
+
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0.8, 0.8, 0.8, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+
+[node name="Path2D" type="Path2D"]
+
+curve = SubResource( 1 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." index="0"]
+
+position = Vector2( -0.0255883, 720.001 )
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = false
+cubic_interp = true
+loop = true
+lookahead = 4.0
+_sections_unfolded = [ "Transform" ]
+
+[node name="ColorRect" type="ColorRect" parent="PathFollow2D" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -750.0
+margin_top = 211.0
+margin_right = 706.0
+margin_bottom = 532.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+
+[node name="Label" type="Label" parent="PathFollow2D/ColorRect" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 503.0
+margin_top = -12.0
+margin_right = 966.0
+margin_bottom = 129.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Oferta de la 
+Banca"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Sprite" type="Sprite" parent="PathFollow2D" index="1"]
+
+position = Vector2( -6.89179e-07, 88.0895 )
+
+[node name="Cobra" type="Sprite" parent="PathFollow2D/Sprite" index="0"]
+
+position = Vector2( -2.99895, -130.677 )
+scale = Vector2( 0.827466, 0.683164 )
+texture = ExtResource( 3 )
+
+[node name="Mano" type="Sprite" parent="PathFollow2D/Sprite/Cobra" index="0"]
+
+position = Vector2( 309.997, 375.472 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Mano2" type="Sprite" parent="PathFollow2D/Sprite/Cobra" index="1"]
+
+position = Vector2( -351.069, 378.769 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Red" type="Sprite" parent="PathFollow2D/Sprite" index="1"]
+
+modulate = Color( 255, 1, 1, 1 )
+position = Vector2( 253.867, 34.907 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="PathFollow2D/Sprite/Red" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -347.0
+margin_top = -25.0
+margin_right = 341.0
+margin_bottom = 108.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+
+[node name="Label" type="Label" parent="PathFollow2D/Sprite/Red/ColorRect" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 686.0
+margin_bottom = 137.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Offer"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Particles2D" type="Particles2D" parent="PathFollow2D/Sprite/Red" index="1"]
+
+show_behind_parent = true
+position = Vector2( 6.49377, 155.841 )
+rotation = -1.5708
+emitting = true
+amount = 50
+lifetime = 1.5
+one_shot = false
+preprocess = 0.0
+speed_scale = 2.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 11 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Visibility" ]
+
+[node name="RedButton" type="Button" parent="PathFollow2D/Sprite/Red" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -411.0
+margin_top = -214.0
+margin_right = 412.0
+margin_bottom = 298.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = false
+align = 1
+_sections_unfolded = [ "custom_styles" ]
+
+[node name="Blue" type="Sprite" parent="PathFollow2D/Sprite" index="2"]
+
+modulate = Color( 1, 2, 119, 1 )
+position = Vector2( -292.084, 39.6667 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Particles2D2" type="Particles2D" parent="PathFollow2D/Sprite/Blue" index="0"]
+
+show_behind_parent = true
+position = Vector2( -23.0865, 162.335 )
+rotation = -1.5708
+emitting = true
+amount = 50
+lifetime = 1.5
+one_shot = false
+preprocess = 0.0
+speed_scale = 2.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 11 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Time", "Visibility" ]
+
+[node name="BlueButton" type="Button" parent="PathFollow2D/Sprite/Blue" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -411.0
+margin_top = -214.0
+margin_right = 412.0
+margin_bottom = 298.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = false
+align = 1
+_sections_unfolded = [ "custom_styles" ]
+
+[node name="Tween" type="Tween" parent="." index="1"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[connection signal="pressed" from="PathFollow2D/Sprite/Red/RedButton" to="." method="_on_RedButton_pressed"]
+
+[connection signal="pressed" from="PathFollow2D/Sprite/Blue/BlueButton" to="." method="_on_BlueButton_pressed"]
+
+
