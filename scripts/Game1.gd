@@ -1,13 +1,11 @@
 extends Node2D
 
-onready var path = $Path2d
 onready var follow = $Path2D/PathFollow2D
 onready var tween = $Tween
 onready var holding_porta = $Path2D/PathFollow2D/ColorRect
 var index
 var bank_offer
-var bank_offer_count = 0
-var boc_limit = 5
+var bank_offer_count = 5
 var sample = []
 var hold = false
 var hold_index
@@ -35,7 +33,7 @@ func _ready():
 
 
 func _process(delta):
-	$Path2D/PathFollow2D/ColorRect/Sprite/Offer.text = "Oferta en:\n" + str(boc_limit - bank_offer_count)
+	$Path2D/PathFollow2D/ColorRect/Sprite/Offer.text = "Oferta en:\n" + str(bank_offer_count)
 
 
 func _on_ItemList_item_selected(index):
@@ -77,7 +75,7 @@ func _on_Abrir_pressed():
 	$Sprite2/ColorRect/Label.text = str(sample[index])+"000"
 	$ItemList.set_item_icon(index, load("res://textures/porta_cancelado.png"))
 	$ItemList.set_item_selectable(index, false)
-	bank_offer_count += 1
+	bank_offer_count -= 1
 	portas -= 1
 	var t = Timer.new()
 	t.set_wait_time(1)
@@ -93,7 +91,7 @@ func _on_Abrir_pressed():
 			porta_index += 1
 			
 		last_choice()
-	if bank_offer_count == boc_limit:
+	if bank_offer_count == 0:
 		bank_offer()
 
 
@@ -105,7 +103,6 @@ func bank_offer():
 	$Offer.show_offer(offer)
 	if bank_pitch > 1:
 		bank_pitch -= 1
-	bank_offer_count = 0
 
 
 func _on_Offer_offer_taken():
@@ -116,7 +113,7 @@ func _on_Offer_offer_taken():
 
 
 func _on_Offer_offer_refused():
-	bank_offer_count = randi()%5+1
+	bank_offer_count = randi()%7+1
 	if bank_offer_count >= portas-2:
 		bank_offer_count = portas-2
 	$Offer.hide_offer()
@@ -142,12 +139,12 @@ func endgame():
 	$Path2D/PathFollow2D/EndGame.show()
 	$Path2D/PathFollow2D/EndGame/Sprite/ColorRect/Label.text = winnings
 	var t = Timer.new()
-	t.set_wait_time(5)
+	t.set_wait_time(10)
 	t.set_one_shot(true)
 	self.add_child(t)
 	t.start()
 	yield(t, "timeout")
 	t.queue_free()
-	# TODO: return to main menu
+	get_tree().change_scene("res://scenes/MainMenu.tscn")
 
 
